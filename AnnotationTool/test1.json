@@ -1,0 +1,15 @@
+{
+  "variables": [
+    {
+      "inputDatatype": "String",
+      "name": "VariableX",
+      "outputDatatype": "String"
+    }
+  ],
+  "resourceGenerators": [
+    {
+      "name": "ResGen1",
+      "resource": "Patient"
+    }
+  ]
+}

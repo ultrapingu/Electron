@@ -1,0 +1,16 @@
+{
+  "variables": [
+    {
+      "inputDatatype": "Integer",
+      "name": "Test Variable 1",
+      "outputDatatype": "Integer",
+      "unit": "kg"
+    }
+  ],
+  "resourceGenerators": [
+    {
+      "name": "Resource Generator 1",
+      "resource": "Observation"
+    }
+  ]
+}
