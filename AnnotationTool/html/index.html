@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tacitr</title>
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="../css/photon.min.css">
+
+	<!-- Javascript -->
+	<script src="../js/index.js" charset="utf-8"></script>
+</head>
+<body>
+	<div class="window">
+
+		<!-- .toolbar-header sits at the top of your app -->
+		<header class="toolbar toolbar-header">
+			<h1 class="title">Tacitr</h1>
+		</header>
+
+		<!-- Your app's content goes inside .window-content -->
+		<div class="window-content">
+			<div class="pane-group">
+				<div class="pane pane-sm sidebar">
+					<nav class="nav-group">
+						<h5 class="nav-group-title">Annotation</h5>
+						<span class="nav-group-item active" id="nav-metadata" target="metadata-view-panel">
+							<span class="icon icon-tag"></span>
+							Metadata
+						</span>
+						<span class="nav-group-item" id="nav-metadata" target="variable-view-panel">
+							<span class="icon icon-doc-text"></span>
+							Variables
+						</span>
+						<span class="nav-group-item" id="nav-metadata" target="resourcegenerator-view-panel">
+							<span class="icon icon-flow-tree"></span>
+							Resource Generators
+						</span>
+						<span class="nav-group-item" id="nav-metadata" target="stats-view-panel">
+							<span class="icon icon-chart-line"></span>
+							Stats
+						</span>
+					</nav>
+				</div>
+
+				<div class="pane metadata-view-panel">
+					<form>
+						<div class="form-group">
+							<label>Name</label>
+							<input type="text" class="form-control" placeholder="Annotation Name">
+						</div>
+						<div class="form-group">
+							<label>Description</label>
+							<textarea class="form-control" rows="3"></textarea>
+						</div>
+						<div class="form-group">
+							<label>Author</label>
+							<input type="text" class="form-control" placeholder="Author">
+						</div>
+						<div class="form-actions">
+							<button type="submit" class="btn btn-form btn-default">Cancel</button>
+							<button type="submit" class="btn btn-form btn-primary">OK</button>
+						</div>
+					</form>
+				</div>
+
+				<div class="pane variable-view-panel">
+					<ul class="list-group" >
+						<li class="list-group-header" >
+							<input class="form-control" type="text" placeholder="Variable Name" >
+						</li>
+						<li class="list-group-item" >
+							<img class="img-circle media-object pull-left" src="../assets/icons/png/integer.png" width="32" height="32" >
+							<div class="media-body" >
+								<strong>PatientNo</strong>
+								<p>Integer -> Integer</p>
+								<p>Mappings: No</p>
+							</div>
+						</li>
+						<li class="list-group-item" >
+							<img class="img-circle media-object pull-left" src="../assets/icons/png/date.png" width="32" height="32" >
+							<div class="media-body" >
+								<strong>DOB</strong>
+								<p>String -> DOB</p>
+								<p>Mappings: No</p>
+							</div>
+						</li>
+						<li class="list-group-item" >
+							<img class="img-circle media-object pull-left" src="../assets/icons/png/coding.png" width="32" height="32" >
+							<div class="media-body" >
+								<strong>Gender</strong>
+								<p>Integer -> coding</p>
+								<p>Mappings: Yes</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<div class="pane variable-view-panel">
+					<form>
+						<div class="form-group">
+							<label>Variable Name</label>
+							<input type="text" class="form-control" placeholder="Variable Name">
+						</div>
+						<div class="form-group">
+							<label>Description</label>
+							<textarea class="form-control" rows="3"></textarea>
+						</div>
+						<div class="form-group">
+							<label>Input Datatype</label>
+							<select class="form-control" id="variable-input-datatype-select">
+							</select>
+						</div>
+						<div class="form-group">
+							<label>Output Datatype</label>
+							<select class="form-control" id="variable-output-datatype-select">
+							</select>
+						</div>
+						<div class="form-group" id="variable-format-input">
+							<label>Format</label>
+							<select class="form-control" id="variable-format-input-select">
+							</select>
+						</div>
+						<div class="form-group" id="variable-mappings-input">
+							<label>Mappings</label>
+							<select class="form-control" id="variable-mappings-input-select">
+							</select>
+						</div>
+						<div class="form-actions">
+							<button type="submit" class="btn btn-form btn-default">Cancel</button>
+							<button type="submit" class="btn btn-form btn-primary">OK</button>
+						</div>
+					</form>
+				</div>
+
+				<div class="pane resourcegenerator-view-panel">
+					<ul class="list-group" >
+						<li class="list-group-header" >
+							<input class="form-control" type="text" placeholder="Resource Generator Name" >
+						</li>
+						<li class="list-group-item" >
+							<img class="img-circle media-object pull-left" src="../assets/icons/png/resource.png" width="32" height="32" >
+							<div class="media-body" >
+								<strong>iFaam Patient</strong>
+								<p>Type: Patient</p>
+								<p>Profile: N/A</p>
+							</div>
+						</li>
+						<li class="list-group-item" >
+							<img class="img-circle media-object pull-left" src="../assets/icons/png/resource.png" width="32" height="32" >
+							<div class="media-body" >
+								<strong>Blood Pressure</strong>
+								<p>Type: Observation</p>
+								<p>Profile: purl.org/bloodpressure</p>
+							</div>
+						</li>
+						<li class="list-group-item" >
+							<img class="img-circle media-object pull-left" src="../assets/icons/png/resource.png" width="32" height="32" >
+							<div class="media-body" >
+								<strong>Skin Prick Test</strong>
+								<p>Type: Observation</p>
+								<p>Profile: purl.org/skinpricktest</p>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+				<div class="pane resourcegenerator-view-panel">
+					<form>
+						<div class="form-group">
+							<label>Input Datatype</label>
+							<select class="form-control">
+								<option>Patient</option>
+								<option>Observation</option>
+							</select>
+						</div>
+						<div class="form-actions">
+							<button type="submit" class="btn btn-form btn-default">Cancel</button>
+							<button type="submit" class="btn btn-form btn-primary">OK</button>
+						</div>
+					</form>
+				</div>
+
+				<div class="view stats-view-panel">
+					<div class="pane">
+						Stats Go Here
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<footer class="toolbar toolbar-footer">
+			<h1 class="title">© Andrew Broadbent</h1>
+		</footer>
+	</div>
+</body>
+</html>
