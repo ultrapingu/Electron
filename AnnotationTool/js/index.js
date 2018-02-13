@@ -33,17 +33,17 @@ var config = {
 var layout, savedState = localStorage.getItem('savedState');
 if(savedState !== null) {
 
-    layout = new GoldenLayout(JSON.parse(savedState));
+	layout = new GoldenLayout(JSON.parse(savedState));
 }
 else {
 
-    layout = new GoldenLayout(config);
+	layout = new GoldenLayout(config);
 }
 
 layout.on( 'stateChanged', function() {
 
-    var state = JSON.stringify(layout.toConfig());
-    localStorage.setItem('savedState', state);
+	var state = JSON.stringify(layout.toConfig());
+	localStorage.setItem('savedState', state);
 });
 
 function addWindowComponents(layout) {
