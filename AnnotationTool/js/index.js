@@ -4,7 +4,7 @@ const GoldenLayout = require('golden-layout');
 const remote = require('electron').remote
 const path = require('path')
 
-var layout = new GoldenLayout({
+var config = {
 	content: [{
 		type: 'column',
 		content: [{
@@ -27,69 +27,33 @@ var layout = new GoldenLayout({
 			componentName: 'annotation-stats'
 		}]
 	}]
-});
+};
 
-layout.on('stackCreated', function (stack) {
-	stack
-		.header
-		.controlsContainer
-		.find('.lm_close') //get the close icon
-		.off('click') //unbind the current click handler
-		.click(function () {
-			//add your own
-			if (confirm('really close this?')) {
-				stack.remove();
-			}
-		});
-});
+// Load/Create layout
+var layout, savedState = localStorage.getItem('savedState');
+if(savedState !== null) {
 
-layout.on('tabCreated', function (tab) {
-	tab
-		.closeElement
-		.off('click') //unbind the current click handler
-		.click(function () {
-			//add your own
-			if (confirm('really close this?')) {
-				tab.contentItem.remove();
-			}
-		});
-});
+    layout = new GoldenLayout(JSON.parse(savedState));
+}
+else {
 
-function updatePosition(lmElement, webview) {
-	const element = $(lmElement);
-	let css = element.offset();
-
-	css['width'] = lmElement.width();
-	css['height'] = lmElement.height();
-
-	const isVisible = lmElement.is(":visible");
-
-	if (isVisible) {
-		$(webview).show();
-	} else {
-		$(webview).hide();
-	}
-
-	// css['display'] = ;
-	// const isVisible = element.parentNode.style.display != 'none';
-	// css['display'] = element.parent().style;
-
-	console.log(`Updating webview "${webview.attr('id')}": display: ${isVisible}, width:${css.width}, height:${css.height}, top:${css.top}, left:${css.left}`);
-
-	$(webview).css(css);
+    layout = new GoldenLayout(config);
 }
 
-function addWindowComponents(layout, updatePosition) {
+layout.on( 'stateChanged', function() {
 
-	require('./window/annotation-metadata.js').init(layout, updatePosition)
-	require('./window/annotation-variables.js').init(layout, updatePosition)
-	require('./window/annotation-resource-generators.js').init(layout, updatePosition)
-	require('./window/annotation-stats.js').init(layout, updatePosition)
+    var state = JSON.stringify(layout.toConfig());
+    localStorage.setItem('savedState', state);
+});
+
+function addWindowComponents(layout) {
+
+	require('./window/annotation-metadata.js').init(layout)
+	require('./window/annotation-variables.js').init(layout)
+	require('./window/annotation-resource-generators.js').init(layout)
+	require('./window/annotation-stats.js').init(layout)
 }
 
-addWindowComponents(layout, updatePosition)
-
-
-
+addWindowComponents(layout)
 
 layout.init();
