@@ -23,7 +23,7 @@ function createMainWindow() {
 		icon: path.join(resourcePath, 'assets', 'icons', 'png', '64x64.png')
 	});
 
-	win.openDevTools();
+	win.resourcePath = resourcePath
 	win.loadURL(path.join(resourcePath, 'html', 'index.html'));
 	win.on('closed', onClosed);
 
