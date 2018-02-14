@@ -3,7 +3,7 @@ window.$ = $
 const GoldenLayout = require('golden-layout');
 const remote = require('electron').remote
 const path = require('path')
-const Annotation = require('./annotation.js').
+const Annotation = require('./classes/annotation.js')
 
 var config = {
 	content: [{
@@ -63,11 +63,13 @@ function addWindowComponents(layout) {
 
 	require('./window/annotation-metadata.js').init(layout)
 	require('./window/annotation-variables.js').init(layout)
+	require('./window/annotation-variable-editor.js').init(layout)
 	require('./window/annotation-resource-generators.js').init(layout)
+	require('./window/annotation-resource-generator-editor.js').init(layout)
 	require('./window/annotation-stats.js').init(layout)
 }
 
-setupAnnotation(filePath)
+setupAnnotation(remote.getCurrentWindow().args.filePath)
 addWindowComponents(layout)
 
 layout.init();

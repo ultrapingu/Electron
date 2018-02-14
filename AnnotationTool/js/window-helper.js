@@ -9,7 +9,7 @@ module.exports = {
 		layout.registerComponent(componentName, function (container, state) {
 
 			// Create content
-			var resourcePath = remote.getCurrentWindow().resourcePath
+			var resourcePath = remote.getCurrentWindow().args.resourcePath
 			var htmlPath = path.join(resourcePath, 'html', 'window', componentName + '.html')
 
 			fs.readFile(htmlPath, "utf8", function (err, html) {
