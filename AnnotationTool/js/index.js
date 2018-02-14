@@ -3,6 +3,7 @@ window.$ = $
 const GoldenLayout = require('golden-layout');
 const remote = require('electron').remote
 const path = require('path')
+const Annotation = require('./annotation.js').
 
 var config = {
 	content: [{
@@ -46,6 +47,18 @@ layout.on( 'stateChanged', function() {
 	localStorage.setItem('savedState', state);
 });
 
+function setupAnnotation(filePath) {
+
+	// Attempt to load
+	if (filePath) {
+
+		window.annotation = Annotation.load(filePath);
+	}
+
+	// If not loaded, create default
+	window.annotation = window.annotation || new Annotation()
+}
+
 function addWindowComponents(layout) {
 
 	require('./window/annotation-metadata.js').init(layout)
@@ -54,6 +67,7 @@ function addWindowComponents(layout) {
 	require('./window/annotation-stats.js').init(layout)
 }
 
+setupAnnotation(filePath)
 addWindowComponents(layout)
 
 layout.init();
