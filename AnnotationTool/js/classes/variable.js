@@ -11,6 +11,7 @@ class Variable extends EventSpawner {
 		this._description = ''
 		this._inputDatatype = ''
 		this._outputDatatype = ''
+		this._mappings = null
 		this._unit = ''
 		this._format = ''
 		this._language = ''
@@ -53,6 +54,15 @@ class Variable extends EventSpawner {
 
 	set outputDatatype(str) {
 		this._outputDatatype = str
+		spawnEvent('onChanged', this)
+	}
+
+	get mappings() {
+		return this._mappings
+	}
+
+	set mappings(ary) {
+		this._mappings = ary
 		spawnEvent('onChanged', this)
 	}
 
