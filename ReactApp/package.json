@@ -2,7 +2,7 @@
   "name": "electron-quick-start",
   "version": "1.0.0",
   "description": "A minimal Electron application",
-  "main": "js/main/main.js",
+  "main": "src/main/main.js",
   "scripts": {
     "start": "electron ."
   },
@@ -16,13 +16,15 @@
   ],
   "author": "GitHub",
   "license": "CC0-1.0",
-  "dependencies": {
-    "create-react-class": "^15.6.3",
-    "golden-layout": "^1.5.9",
-    "jquery": "^3.3.1",
-    "react": "^16.2.0"
-  },
   "devDependencies": {
-    "electron": "^1.4.1"
+    "electron": "~1.7.8",
+    "electron-compilers": "^5.9.0",
+    "electron-prebuilt-compile": "^1.8.2"
+  },
+  "dependencies": {
+    "electron-compile": "^6.4.2",
+    "jquery": "^3.3.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   }
 }
