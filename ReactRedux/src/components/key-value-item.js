@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd  from 'material-ui/svg-icons/content/add';
 import ContentClear from 'material-ui/svg-icons/content/clear';
 import $ from 'jquery'
+import IconButton from 'material-ui/IconButton';
+import {red500} from 'material-ui/styles/colors';
 
 class KeyValueItem extends Component {
 
@@ -50,9 +51,9 @@ class KeyValueItem extends Component {
 
 		const buttonStyle = {marginRight: 20};
 
-		let removeButton = () => (<FloatingActionButton mini={true} style={buttonStyle} onClick={removeHandler} ><ContentClear /></FloatingActionButton>);
+		let removeButton = () => (<IconButton tooltip="Remove" onClick={removeHandler}><ContentClear hoverColor={red500}  /></IconButton>);
 
-		let keyEditor = (<TextField ref="key" hintText="name" defaultValue={this.props.itemKey} onChange={keyChangeHandler} />);
+		let keyEditor = (<TextField ref="key" hintText="key" defaultValue={this.props.itemKey} onChange={keyChangeHandler} />);
 		let valueEditor = (<TextField hintText="value" ref="value" defaultValue={this.props.itemValue} onChange={valueChangeHandler} />);
 		let button = removeButton()
 

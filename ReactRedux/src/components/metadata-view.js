@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import AnnotationState from '../state/annotation-state'
 import AnnotationActions from '../actions/annotation-actions';
+import RaisedButton from 'material-ui/RaisedButton';
 import KeyValueEditor from './key-value-editor'
+import Divider from 'material-ui/Divider';
 
 // Pure react component. Should not be connected to redux store; its container
 // should be connected to the store.
@@ -16,22 +18,21 @@ export class MetadataView extends React.Component {
 	}
 
 	onItemChange(key, value) {
-		this.onRowChanged(key, value)
+		console.log('onItemChange - ' + key + ":" + value)
 	}
 
 	onAdd(key, value) {
-		this.onAdd(key, value)
+		console.log('onItemChange - ' + key + ":" + value)
 	}
 
 	onRemove(key) {
-		this.onRemove(key)
 	}
 
 	render() {
 
-		let changeHandler = (key, value) => this.onKeyChange(key, value).bind(this);
-		let addHandler = (key, value) => this.onAdd(key, value).bind(this);
-		let removeHandler = (key) => this.onRemove(key).bind(this);
+		let changeHandler = (key, value) => this.onKeyChange(key, value);
+		let addHandler = (key, value) => this.onAdd(key, value);
+		let removeHandler = (key) => this.onRemove(key);
 
 		// Index items
 		var idx = 0
@@ -42,17 +43,21 @@ export class MetadataView extends React.Component {
 			}
 		}
 		var result = (
-			<KeyValueEditor rows={rows} onAdd={addHandler} onRemove={removeHandler} onRowChanged={changeHandler} />
+			<div>
+				<div style={{display:'inline-block', width: '100%'}}>
+					<h1 style={{display: 'inline'}} >Edit Metadata</h1>
+					<RaisedButton style={{float:'right', display:'block'}} label="Save" />
+				</div>
+				<Divider style={{marginTop:'10px'}} />
+				<KeyValueEditor rows={rows} onAdd={addHandler} onRemove={removeHandler} onRowChanged={changeHandler} />
+			</div>
 		);
 		return result;
 	}
 }
 
 MetadataView.PropTypes = {
-	metadata: PropTypes.object,
-	onAdd: React.PropTypes.func,
-	onRemove: React.PropTypes.func,
-	onRowChanged: React.PropTypes.func
+	metadata: PropTypes.object
 }
 
 function mapStateToProps(state) {

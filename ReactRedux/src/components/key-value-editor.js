@@ -27,6 +27,11 @@ class KeyValueEditor extends Component {
 		rows[index].itemKey = newKey;
 		this.setState({ rows });
 
+		// Item was a new addition
+		if ((oldKey === '') && (value === '')){
+			this.handleAdd(newKey, value)
+		}
+
 		// If it was the blank row that was edited, it needs updating
 		this.addBlankRow()
 	}
@@ -36,6 +41,11 @@ class KeyValueEditor extends Component {
 		let { rows } = this.state;
 		rows[index].itemValue = newValue;
 		this.setState({ rows });
+
+		// Item was a new addition
+		if ((key === '') && (oldValue === '')){
+			this.handleAdd(key, newValue)
+		}
 
 		// If it was the blank row that was edited, it needs updating
 		this.addBlankRow()
@@ -66,6 +76,11 @@ class KeyValueEditor extends Component {
 		this.addBlankRow()
 	}
 
+	handleAdd(key, value) {
+
+		this.state.onAdd(key, value)
+	}
+
 	isEmpty(row) {
 		return ((row.itemKey.trim() === '') && (row.itemValue.trim() === ''))
 	}
@@ -76,7 +91,7 @@ class KeyValueEditor extends Component {
 
 	render() {
 		return (
-			<ul className="key-value-item">
+			<ul className="key-value-item" style={{listStyleType: 'none'}} >
 				{this.state.rows.map((row, i) =>
 					<KeyValueItem itemKey={row.itemKey} itemValue={row.itemValue} onRemove={this.onRemove.bind(this, row.id)} onKeyChange={this.onKeyChanged.bind(this, i)} onValueChange={this.onValueChanged.bind(this, i)} key={row.id} />
 				)}
