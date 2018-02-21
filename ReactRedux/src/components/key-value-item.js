@@ -9,50 +9,52 @@ class KeyValueItem extends Component {
 
 	constructor(props) {
 		super(props);
-		// let isEmpty = (props.itemKey);
-		// this.state = $.extend({
-		// 	itemKey: '',
-		// 	itemValue: '',
-		// 	onAdd: (key, value) => {},
-		// 	onRemove: (key, value) => {},
-		// 	onItemChange: (key) => {}
-		// }, props, {isNew: isEmpty});
+		let isEmpty = (props.itemKey);
+		this.state = $.extend({
+			itemKey: '',
+			itemValue: '',
+			onRemove: () => {},
+			onKeyChange: (itemKey, value, itemValue) => {},
+			onValueChange: (itemKey, itemValue, value) => {}
+		}, props, {isNew: isEmpty});
 	}
 
 	onKeyChange(value) {
-		console.log('onKeyChange');
+		let { itemKey } = this.state
+		let { itemValue } = this.state
+
+		this.state.onKeyChange(itemKey, value, itemValue)
+		itemKey = value;
+
+		this.setState({ itemKey });
 	}
 
 	onValueChange(value) {
-		console.log('onValueChange');
+		let { itemKey } = this.state
+		let { itemValue } = this.state
+
+		this.state.onValueChange(itemKey, itemValue, value)
+		itemValue = value;
+
+		this.setState({ itemValue });
 	}
 
-	onAdd() {
-		console.log('onAdd');
-	}
-
-	onRemove() {
-		console.log('onAdd');
+	handleRemove() {
+		this.state.onRemove()
 	}
 
 	render() {
-
-		console.log(this.props)
-		console.log(this.state)
-
-		let keyChangeHandler = (event, value) => this.onKeyChange(value).bind(this);
-		let valueChangeHandler = (event, value) => this.onKeyChange(value).bind(this);
-		let addHandler = (event, value) => this.onAdd().bind(this);
-		let removeHandler = (event, value) => this.onRemove().bind(this);
+		let keyChangeHandler = (event, value) => this.onKeyChange(value);
+		let valueChangeHandler = (event, value) => this.onValueChange(value);
+		let removeHandler = (event) => this.handleRemove();
 
 		const buttonStyle = {marginRight: 20};
 
-		let addButton = () => (<FloatingActionButton mini={true} style={buttonStyle}><ContentAdd /></FloatingActionButton>);
-		let removeButton = () => (<FloatingActionButton mini={true} style={buttonStyle}><ContentClear /></FloatingActionButton>);
+		let removeButton = () => (<FloatingActionButton mini={true} style={buttonStyle} onClick={removeHandler} ><ContentClear /></FloatingActionButton>);
 
 		let keyEditor = (<TextField ref="key" hintText="name" defaultValue={this.props.itemKey} onChange={keyChangeHandler} />);
 		let valueEditor = (<TextField hintText="value" ref="value" defaultValue={this.props.itemValue} onChange={valueChangeHandler} />);
-		let button = this.props.isNew ? addButton() : removeButton()
+		let button = removeButton()
 
 		return (
 			<li className="key-value-item">
@@ -67,9 +69,9 @@ class KeyValueItem extends Component {
 KeyValueItem.propTypes = {
 	itemKey: React.PropTypes.string,
 	itemValue: React.PropTypes.string,
-	onAdd: React.PropTypes.func,
 	onRemove: React.PropTypes.func,
-	onItemChange: React.PropTypes.func
+	onKeyChange: React.PropTypes.func,
+	onKValueChange: React.PropTypes.func
 }
 
 export default KeyValueItem;
